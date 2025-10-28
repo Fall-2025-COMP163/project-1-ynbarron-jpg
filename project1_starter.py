@@ -8,7 +8,7 @@ AI (ChatGPT) assisted with file read/write structure and stat formula design.
 All code was reviewed and understood by the student.
 """
 
-import os  # used to check if file exists
+import os  # used to check if file exists or directory validity
 
 # =============================
 # Character Creation Functions
@@ -51,6 +51,9 @@ def create_character(name, character_class):
     Returns a dictionary or None if invalid class.
     """
     valid_classes = ["warrior", "mage", "rogue", "cleric"]
+    if character_class is None or name is None or name == "":
+        print("Error: Invalid name or class.")
+        return None
     if character_class.lower() not in valid_classes:
         print("Error: Invalid class. Choose Warrior, Mage, Rogue, or Cleric.")
         return None
@@ -81,6 +84,12 @@ def save_character(character, filename):
     Returns True if successful, False otherwise.
     """
     if character is None or filename == "":
+        return False
+
+    # Check if directory exists before trying to write
+    directory = os.path.dirname(filename)
+    if directory != "" and not os.path.isdir(directory):
+        print("Error: Invalid directory path.")
         return False
 
     with open(filename, "w") as f:
@@ -176,5 +185,4 @@ if __name__ == "__main__":
         display_character(loaded)
         level_up(hero)
         display_character(hero)
-
 
