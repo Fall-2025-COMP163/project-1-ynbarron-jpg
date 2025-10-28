@@ -1,7 +1,7 @@
 """
 COMP 163 - Project 1: Character Creator & Saving/Loading
-Name: [Your Name Here]
-Date: [Date]
+Name: Yahzir Barron
+Date: 10/28/25
 
 AI Usage:
 AI (ChatGPT) assisted with file read/write structure and stat formula design.
@@ -171,18 +171,28 @@ def level_up(character):
 
 
 # =============================
-# Optional Testing Area
+# Main Program
 # =============================
 
 if __name__ == "__main__":
-    print("=== CHARACTER CREATOR TEST ===")
-    hero = create_character("Aria", "Mage")
+    print("=== CHARACTER CREATOR ===")
+    name = input("Enter character name: ")
+    character_class = input("Enter class (Warrior, Mage, Rogue, Cleric): ")
+
+    hero = create_character(name, character_class)
+
     if hero:
         display_character(hero)
-        save_character(hero, "aria.txt")
-        loaded = load_character("aria.txt")
+
+        # Optional save/load test
+        save_character(hero, "saved_character.txt")
+        print("\nCharacter saved!")
+
+        loaded = load_character("saved_character.txt")
         print("\nLoaded from file:")
         display_character(loaded)
+
         level_up(hero)
         display_character(hero)
+
 
